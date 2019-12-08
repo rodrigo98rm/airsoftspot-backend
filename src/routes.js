@@ -9,6 +9,10 @@ import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
+routes.get('/', (req, res) => {
+  res.send(`AirsoftSpot V${process.env.VERSION} - ${process.env.NODE_ENV}`);
+});
+
 // Session
 routes.post('/session', SessionController.store);
 
