@@ -53,7 +53,7 @@ class UserController {
 
   async getUserById(req, res) {
     pool.query(
-      'SELECT * FROM users WHERE userId = $1;',
+      'SELECT userId, cpf, name, email, birth, username, address FROM users WHERE userId = $1;',
       [req.userId],
       (error, results) => {
         if (error) {
