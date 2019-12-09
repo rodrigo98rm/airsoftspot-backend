@@ -81,7 +81,12 @@ class FieldController {
         'SELECT * FROM field WHERE fieldId = $1',
         [req.params.fieldId]
       );
-      return res.json(result.rows[0]);
+
+      if (result.rows[0]) {
+        return res.json(result.rows[0]);
+      }
+
+      return res.status(404).json({ error: 'Field not found' });
     } catch (error) {
       return res.status(500).send({ error: 'Error' });
     }
