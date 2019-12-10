@@ -5,6 +5,7 @@ import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
 import FieldController from './app/controllers/FieldController';
 import RatingController from './app/controllers/RatingController';
+import GameController from './app/controllers/GameController';
 
 // Middlewares
 import authMiddleware from './app/middlewares/auth';
@@ -44,5 +45,8 @@ routes.put('/field/:fieldId', FieldController.updateField);
 // Ratings
 routes.post('/rating/:fieldId', RatingController.createRating);
 routes.get('/rating', RatingController.getRatingsByUser);
+
+// Games
+routes.post('/game/:fieldId', GameController.createGame);
 
 export default routes;
