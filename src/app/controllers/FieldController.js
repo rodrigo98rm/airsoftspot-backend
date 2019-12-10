@@ -7,6 +7,8 @@ const MODERATOR = 2;
 const schema = Yup.object().shape({
   name: Yup.string().required(),
   address: Yup.string().required(),
+  city: Yup.string().required(),
+  state: Yup.string().required(),
   about: Yup.string().required(),
   site: Yup.string().required(),
 });
@@ -20,12 +22,12 @@ class FieldController {
       return res.status(400).json({ error: error.message });
     }
 
-    const { name, address, about, site } = req.body;
+    const { name, address, city, state, about, site } = req.body;
 
     try {
       const resultField = await pool.query(
-        'INSERT INTO field (name, address, about, site) VALUES ($1, $2, $3, $4) RETURNING *;',
-        [name, address, about, site]
+        'INSERT INTO field (name, address, city, state, about, site) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
+        [name, address, city, state, about, site]
       );
 
       const field = resultField.rows[0];
@@ -49,7 +51,7 @@ class FieldController {
       return res.status(400).json({ error: error.message });
     }
 
-    const { name, address, about, site } = req.body;
+    const { name, address, city, state, about, site } = req.body;
 
     try {
       // Check if field belongs to the user
@@ -65,8 +67,8 @@ class FieldController {
       }
 
       const result = await pool.query(
-        'UPDATE field SET name = $2, address = $3, about = $4, site = $5 WHERE fieldId = $1 RETURNING *',
-        [req.params.fieldId, name, address, about, site]
+        'UPDATE field SET name = $2, address = $3, city = $4, state = $5, about = $6, site = $7 WHERE fieldId = $1 RETURNING *',
+        [req.params.fieldId, name, address, city, state, about, site]
       );
 
       return res.json(result.rows);
@@ -89,6 +91,21 @@ class FieldController {
       return res.status(404).json({ error: 'Field not found' });
     } catch (error) {
       return res.status(500).send({ error: 'Error' });
+    }
+  }
+
+  async getAllFields(req, res) {
+    const { name = '', city = '', state = '' } = req.query;
+
+    try {
+      const result = await pool.query(
+        'SELECT * FROM field WHERE UPPER(name) LIKE UPPER($1) AND UPPER(city) LIKE UPPER($2) AND UPPER(state) LIKE UPPER($3);',
+        [`%${name}%`, `%${city}%`, `%${state}%`]
+      );
+
+      return res.json(result.rows);
+    } catch (error) {
+      return res.status(500).send({ error });
     }
   }
 }

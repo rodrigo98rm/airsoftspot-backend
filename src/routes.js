@@ -22,6 +22,7 @@ routes.post('/session', SessionController.store);
 routes.post('/users', UserController.createUser);
 
 // Fields
+routes.get('/field', FieldController.getAllFields);
 routes.get('/field/:fieldId', FieldController.getField);
 
 // Rating
