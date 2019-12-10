@@ -99,22 +99,22 @@ class GameController {
     } = req.body;
 
     try {
-      // Check if field exists
-      const fieldResult = await pool.query(
-        'SELECT * FROM field WHERE fieldId = $1;',
-        [req.params.fieldId]
+      // Check if game exists
+      const gameResult = await pool.query(
+        'SELECT * FROM game WHERE gameId = $1;',
+        [req.params.gameId]
       );
 
-      const field = fieldResult.rows[0];
+      const game = gameResult.rows[0];
 
-      if (!field) {
-        return res.status(404).json({ error: 'Field not found' });
+      if (!game) {
+        return res.status(404).json({ error: 'Game not found' });
       }
 
-      // Check if field belongs to the user
+      // Check if game belongs to the user
       const adminResult = await pool.query(
-        'SELECT * FROM admin WHERE userId = $1 AND fieldId = $2;',
-        [req.userId, req.params.fieldId]
+        'SELECT * FROM admin INNER JOIN game ON admin.fieldId = game.fieldId WHERE gameId = $1 AND userId = $2',
+        [req.params.gameId, req.userId]
       );
 
       const isAdmin = adminResult.rows[0];
@@ -125,7 +125,7 @@ class GameController {
 
       // Update Game
       const insertResult = await pool.query(
-        'UPDATE game SET title = $1, startDate = $2, endDate = $3, maxTeamSize = $4, qntMaxEquipment = $5, description = $6 WHERE gameId = $7 RETURNING *;',
+        'UPDATE game SET title = $1, startDate = $2, endDate = $3, maxPlayers = $4, maxTeamSize = $5, qntMaxEquipment = $6, description = $7 WHERE gameId = $8 RETURNING *;',
         [
           title,
           startDate,
@@ -143,6 +143,24 @@ class GameController {
       return res.status(500).send({ error: 'Error' });
     }
   }
+
+  // Get games by field
+  // Returns all games organized by a field
+  async getGamesByField(req, res) {
+    try {
+      const selectResult = await pool.query(
+        'SELECT * FROM game WHERE fieldId = $1;',
+        [req.params.fieldId]
+      );
+
+      return res.json(selectResult.rows);
+    } catch (error) {
+      return res.status(500).send({ error: 'Error' });
+    }
+  }
+
+  // Returns all games that a user will attend to
+  async getGamesByUser(req, res) {}
 }
 
 export default new GameController();

@@ -29,6 +29,9 @@ routes.get('/field/:fieldId', FieldController.getField);
 // Rating
 routes.get('/rating/:fieldId', RatingController.getRatingsByField);
 
+// Games
+routes.get('/game/:fieldId', GameController.getGamesByField);
+
 // #####################################################
 // Define auth middleware for all routes below this line
 // #####################################################
@@ -48,5 +51,6 @@ routes.get('/rating', RatingController.getRatingsByUser);
 
 // Games
 routes.post('/game/:fieldId', GameController.createGame);
+routes.put('/game/:gameId', GameController.updateGame);
 
 export default routes;
