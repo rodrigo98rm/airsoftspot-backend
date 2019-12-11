@@ -6,6 +6,7 @@ import UserController from './app/controllers/UserController';
 import FieldController from './app/controllers/FieldController';
 import RatingController from './app/controllers/RatingController';
 import GameController from './app/controllers/GameController';
+import AttendController from './app/controllers/AttendController';
 
 // Middlewares
 import authMiddleware from './app/middlewares/auth';
@@ -31,6 +32,7 @@ routes.get('/rating/:fieldId', RatingController.getRatingsByField);
 
 // Games
 routes.get('/game/:fieldId', GameController.getGamesByField);
+routes.get('/game/:gameId/players', GameController.getGamePlayers);
 
 // #####################################################
 // Define auth middleware for all routes below this line
@@ -52,5 +54,9 @@ routes.get('/rating', RatingController.getRatingsByUser);
 // Games
 routes.post('/game/:fieldId', GameController.createGame);
 routes.put('/game/:gameId', GameController.updateGame);
+routes.get('/game', GameController.getGamesByUser);
+
+// Attend
+routes.post('/attend/:gameId', AttendController.createAttend);
 
 export default routes;

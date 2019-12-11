@@ -160,7 +160,31 @@ class GameController {
   }
 
   // Returns all games that a user will attend to
-  async getGamesByUser(req, res) {}
+  async getGamesByUser(req, res) {
+    try {
+      const selectResult = await pool.query(
+        'SELECT game.gameId, field.fieldId, title, startDate, endDate, maxPlayers, maxTeamSize, qntMaxEquipment, description, equipmentType, field.name, field.address, field.city, field.state, field.site FROM game INNER JOIN attend ON game.gameId = attend.gameId INNER JOIN users ON users.userId = attend.userId INNER JOIN field ON field.fieldId = game.fieldId WHERE attend.userId = $1;',
+        [req.userId]
+      );
+
+      return res.json(selectResult.rows);
+    } catch (error) {
+      return res.status(500).send({ error: 'Error' });
+    }
+  }
+
+  async getGamePlayers(req, res) {
+    try {
+      const selectResult = await pool.query(
+        'SELECT users.userId, name, username FROM game INNER JOIN attend ON attend.gameId = game.gameId INNER JOIN users ON users.userId = attend.userId WHERE game.gameId = $1;',
+        [req.params.gameId]
+      );
+
+      return res.json(selectResult.rows);
+    } catch (error) {
+      return res.status(500).send({ error: 'Error' });
+    }
+  }
 }
 
 export default new GameController();
