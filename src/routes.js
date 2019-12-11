@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import { version } from './config/version';
+
 // Controllers
 import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
@@ -14,7 +16,7 @@ import authMiddleware from './app/middlewares/auth';
 const routes = new Router();
 
 routes.get('/', (req, res) => {
-  res.send(`AirsoftSpot V${process.env.VERSION} - ${process.env.NODE_ENV}`);
+  res.send(`AirsoftSpot V${version} - ${process.env.NODE_ENV}`);
 });
 
 // Session
