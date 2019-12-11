@@ -25,7 +25,7 @@ class UserController {
 
     try {
       const results = await pool.query(
-        'INSERT INTO users (cpf, name, email, password, birth, username, address) VALUES ($1, $2, $3, $4, $5, $6, $7);',
+        'INSERT INTO users (cpf, name, email, password, birth, username, address) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;',
         [cpf, name, email, passwordHash, birth, username, address]
       );
       return res.json(results.rows);
