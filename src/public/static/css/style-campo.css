@@ -1,0 +1,188 @@
+.nav-wrapper{
+	background-color: #222;
+}
+
+.nav-content{
+	background-color: #2a2a2a;
+}
+
+.header-link{
+	font-size: 18px !important;
+	letter-spacing: 0.2px;
+}
+
+body {
+	background-color: #222;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #e4a317;
+    font-family: "bebas_neueregular","Bebas Neue","Raleway",Arial,Helvetica,sans-serif;
+    font-size: 46px;
+    font-weight: bold;
+    line-height: 50px;
+    margin-bottom: 5px;
+    letter-spacing: 2.2px;
+ }
+
+ .military-font{
+ 	font-family: "bebas_neueregular","Bebas Neue","Raleway",Arial,Helvetica,sans-serif;
+ }
+
+.box-title{
+	top: 10px;
+}
+
+/* Sign In */
+.signin-box{
+	margin: auto;
+	width: 60%;
+	height: 76vh;
+	background-color: #2a2a2a;
+	border-radius: 18px;
+	text-align: center;
+	padding: 1px;
+	overflow-y: auto;
+}
+
+.signin-form-div{
+	margin: 0px 30px;
+}
+
+input{
+	color: #fff;
+}
+
+textarea{
+	color: #fff;
+}
+
+.title-div{
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+#filter{
+	background-color: #e4a317;
+	width: 36px;
+    height: 36px;
+    line-height: 46px;
+    top: -12px;
+    left: 10px;
+}
+
+#filter i{
+	line-height: 0;
+    color: #222;
+    font-weight: 600;		
+}
+
+.title-div .box-title{
+	display: inline-block;
+}
+
+.field-table tr{
+	border-bottom: 2px solid #222;
+	border-top: 2px solid #222;
+}
+
+.field-table > tbody > tr:first-child {
+	border-top: none;
+}
+
+.field-table > tbody > tr:last-child {
+	border-bottom: none;
+}
+
+.field-table td{
+	height: 100px;
+	text-align: center;
+}
+
+.nome-campo{
+	font-size: 22px !important;
+    letter-spacing: 0.2px;
+    color: #e4a317;
+    cursor: pointer;
+}
+
+.localizacao-campo{
+	margin: 0;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.site-campo{
+	margin: 3px 0;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.id-campo{
+	display: none;
+}
+
+.filter-window{
+	z-index: 100;
+	width: 400px;
+	height: 200px;
+	border-radius: 10px;
+	background-color: #fff;
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #222;
+	border: 2px solid #e4a317;
+	text-align: center;
+	display: none;
+}
+
+.select-div{
+	margin: 5px auto;
+	width: 80% !important;
+}
+
+.filter-btn-div{
+	margin-top: 26px;
+}
+
+.field-content-div{
+	height: 900px;
+	width: 900px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	left: 50%;
+	background-color: #2a2a2a;
+	border: 2px solid #222;
+	border-radius: 30px;
+	z-index: 100;
+	text-align: center;
+	color: #fff;
+}
+
+.field-content-header{
+	height: 50px;
+	text-align: right;
+	line-height: 60px;
+}
+
+.close-btn{
+	margin-right: 20px;
+	color: rgba(255, 255, 255, 0.7);
+	cursor: pointer;
+}
+
+#boas-vindas{
+    display: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 18px !important;
+}
+
+#boas-vindas-nome{
+    color: #e4a317;
+}
+
+#logout{
+    height: 30px;
+    line-height: 32px;
+}
