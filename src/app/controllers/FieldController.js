@@ -98,8 +98,9 @@ class FieldController {
     const { name = '', city = '', state = '' } = req.query;
 
     try {
+      // TODO: Order by rating
       const result = await pool.query(
-        'SELECT * FROM field WHERE UPPER(name) LIKE UPPER($1) AND UPPER(city) LIKE UPPER($2) AND UPPER(state) LIKE UPPER($3);',
+        'SELECT name, address, city, state, about, site, AVG(rating.rating) FROM field INNER JOIN rating ON field.fieldId = rating.fieldId WHERE UPPER(name) LIKE UPPER($1) AND UPPER(city) LIKE UPPER($2) AND UPPER(state) LIKE UPPER($3) GROUP BY name, address, city, state, about, site ORDER BY avg DESC;',
         [`%${name}%`, `%${city}%`, `%${state}%`]
       );
 
